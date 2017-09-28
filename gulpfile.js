@@ -8,6 +8,8 @@ var minifyCSS = require('gulp-minify-css')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var rename = require('gulp-rename')
+var sourcemaps = require('gulp-sourcemaps')
+var babel = require('gulp-babel')
 
 // local server
 var browserSync = require('browser-sync').create()
@@ -22,9 +24,11 @@ gulp.task('lint', function() {
 // compile sass
 gulp.task('sass', function() {
   return gulp.src('./src/scss/**/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(concat('styles.css'))
     .pipe(minifyCSS())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css'))
     .pipe(browserSync.reload({
       stream: true
@@ -34,9 +38,13 @@ gulp.task('sass', function() {
 // concatenate and minify js
 gulp.task('scripts', function() {
   return gulp.src('./src/js/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['env']
+    }))
     .pipe(concat('all.js'))
-    .pipe(rename('all.min.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js'))
     .pipe(browserSync.reload({
       stream: true

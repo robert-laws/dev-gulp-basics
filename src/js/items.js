@@ -1,4 +1,4 @@
-items = [
+var items = [
   "thing",
   "stuff",
   "ideas",
@@ -8,6 +8,6 @@ items = [
   "cans"
 ]
 
-for (i = 0; i < items.length; i++) {
+for (var i = 0; i < items.length; i++) {
   console.log(items[i])
 }
