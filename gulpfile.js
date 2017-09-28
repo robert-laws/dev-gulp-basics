@@ -55,7 +55,7 @@ gulp.task('scripts', function() {
 
 // jade
 gulp.task('pug', function() {
-  return gulp.src('./src/*.pug')
+  return gulp.src('./src/pug/**/*.pug')
     .pipe(pug({
       pretty: true
     }))
@@ -76,7 +76,7 @@ gulp.task('browserSync', function() {
 
 gulp.task('watch', ['browserSync', 'sass', 'scripts', 'pug'], function() {
   gulp.watch('./src/scss/*.scss', ['sass'])
-  gulp.watch('./src/*.pug', ['pug'])
+  gulp.watch('./src/pug/**/*.pug', ['pug'])
   gulp.watch('./src/js/*.js', ['scripts'])
 })
 

@@ -1,0 +1,25 @@
+extends ./layouts/layout.pug
+include ./mixins/mixins.pug
+
+block bodyContent
+  - var myHeading = "Made with Pug"
+  - var myItems = ['hat', 'cap', 'bat', 'mat']
+
+  #root.container
+    if myHeading
+      h1 #{myHeading}
+      p Hello People!
+    else
+      h1 Missing the title...
+
+    ul
+      each val in myItems
+        li= val
+
+    +paragraph
+
+    +paragraph2('How are things going?')
+
+    hr
+    section(style={border: '1px solid #000', padding: '10px'})
+      aside Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, quo!

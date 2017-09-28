@@ -1,6 +1,11 @@
 body {
-  background-color: lighten(#FF48DB, 25%);
+  background-color: lighten(#1148DB, 25%);
+  color: #FFF;
   div {
     font-family: Arial, Helvetica, san-serif;
   }
+}
+
+section {
+  border-color: #F154B0 !important;
 }
