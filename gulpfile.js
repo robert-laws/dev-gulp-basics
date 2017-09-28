@@ -10,6 +10,8 @@ var uglify = require('gulp-uglify')
 var rename = require('gulp-rename')
 var sourcemaps = require('gulp-sourcemaps')
 var babel = require('gulp-babel')
+var jade = require('gulp-jade')
+var pug = require('gulp-pug')
 
 // local server
 var browserSync = require('browser-sync').create()
@@ -51,7 +53,17 @@ gulp.task('scripts', function() {
     }))
 })
 
-// 
+// jade
+gulp.task('pug', function() {
+  return gulp.src('./src/*.pug')
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(gulp.dest('dist'))
+    .pipe(browserSync.reload({
+      stream: true
+    }))
+})
 
 // browser sync
 gulp.task('browserSync', function() {
@@ -62,9 +74,9 @@ gulp.task('browserSync', function() {
   })
 })
 
-gulp.task('watch', ['browserSync', 'sass', 'scripts'], function() {
+gulp.task('watch', ['browserSync', 'sass', 'scripts', 'pug'], function() {
   gulp.watch('./src/scss/*.scss', ['sass'])
-  gulp.watch('./dist/*.html', browserSync.reload)
+  gulp.watch('./src/*.pug', ['pug'])
   gulp.watch('./src/js/*.js', ['scripts'])
 })
 
